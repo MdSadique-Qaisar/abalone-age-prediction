@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import numpy as np
 import pickle
+import os
 
 app = Flask(__name__)
 
@@ -42,5 +43,10 @@ def predict():
         prediction_text=f"Predicted Rings: {rings:.2f} | Estimated Age of Abalone: {age:.2f} years"
     )
 
+try:
+    port = os.environ['PORT'];
+except KeyError:
+    port = 3000;
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=port)
